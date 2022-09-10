@@ -78,11 +78,31 @@ year=array[8]
 namec=array[9]
 
      console.log(uid,cid,mid)
-     puhj = '{"' + parseInt(mid) +'":'+'"ok"}'
-     console.log(JSON.parse(puhj))
  firebase.database().ref("slips/"+uid+"/"+cid+"/"+mid).set({}).then((m)=>{
-  admin.database().ref("pay/"+cid+"/"+sid+"/").update(JSON.parse(puhj)).then((m)=>{
-    firebase.database().ref("enroll/"+uid+"/"+cid+"/"+mid+"/").update(JSON.parse(puhj)).then((m)=>{
+  admin.database().ref("pay/"+cid+"/"+sid+"/"+mid).update({
+    pay:"ok",
+    cid:cid,
+    sid:sid,
+    mid:mid,
+    uid:uid,
+    tname:tname,
+    cname:cname,
+    ts: Date.now() / 1000 | 0,
+    fee:fee,
+    year:year
+   }).then((m)=>{
+    firebase.database().ref("enroll/"+uid+"/"+cid+"/"+mid+"/").update({
+      pay:"ok",
+      cid:cid,
+      sid:sid,
+      mid:mid,
+      uid:uid,
+      tname:tname,
+      cname:cname,
+      ts: Date.now() / 1000 | 0,
+      fee:fee,
+      year:year
+     }).then((m)=>{
 tmMsg("<b>✅ New Payment Slip has been approved </b> \n<b>Student ID</b> : "+ "AD"+sid  + "\n<b>Amount</b> : "+fee+ "\n<b>Student Name</b> : "+namec+ "\n<b>Class ID</b> : "+cid+ "\n<b>Month</b> : "+mid+ "\n<b>Class Name</b> : "+cname+ "\n<b>Firebase ID</b> : "+uid+ "\n<b>Teacher</b> : "+tname+ "\n<b>Year</b> : "+year+ "\n<b>URL</b> : "+url  )
 
       res.send("done")
