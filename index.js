@@ -214,6 +214,158 @@ authid2 = "fuck"
 
 
 )
+app.post('/byname', function(req, res) {
+  const retalk = (email,pass) => {
+    function verify(dt){
+    if (dt!=null){
+      if(dt==pass){
+     //   tmMsg(email + " requested pending slips")
+        function thens(dt){
+          res.send(JSON.stringify(dt))
+        }
+        var path = "classes"
+      // Create References
+      const dbRefObject = firebase.database().ref().child(path);
+      
+      // Sync object changes
+      dbRefObject.once('value', snap => thens(snap.val()));
+      } else {
+        res.status(301);
+        res.send("Incorrect Password")
+      
+      }
+    } else {
+      res.status(404);
+      res.send("No Such User")
+    }
+    }
+    
+      var path = "allows/"+email.replace(".","&")
+      console.log(path)
+    // Create References
+    const dbRefObject = sad.database().ref().child(path);
+    
+    // Sync object changes
+    dbRefObject.once('value', snap => verify(snap.val()));
+}
+
+
+authid = "R6VzrAkdsXDAaEOT^Tob19O5@$9@V#$Ic&u!QCGR4LO$3&ktCV"
+authid2 = "fuck"
+    console.log('receiving data ...');
+    console.log('body is ',req.body);
+    console.log('body is ',req.body.auth);
+    if(req.body.auth!=undefined){
+    temp = req.body.auth
+    console.log(CryptoJS.AES.decrypt(temp, authid2).toString(CryptoJS.enc.Utf8))
+    aa = CryptoJS.AES.decrypt(temp, authid2).toString(CryptoJS.enc.Utf8)
+     console.log(JSON.parse(aa)["email"],JSON.parse(aa)["pass"])
+   retalk(JSON.parse(aa)["email"],JSON.parse(aa)["pass"])
+    }
+}
+
+
+)
+app.post('/clearcc', function(req, res) {
+  const retalk = (email,pass) => {
+    function verify(dt){
+    if (dt!=null){
+      if(dt==pass){
+ tmMsg("🔴 "+email + " successfully deleted all coupens" )
+ admin.database().ref("cpen/").set({}).then((cx)=>{
+ res.sendStatus(200)
+ })
+
+      } else {
+        res.status(301);
+        res.send("Incorrect Password")
+      
+      }
+    } else {
+      res.status(404);
+      res.send("No Such User")
+    }
+    }
+    
+      var path = "allows/"+email.replace(".","&")
+      console.log(path)
+    // Create References
+    const dbRefObject = sad.database().ref().child(path);
+    
+    // Sync object changes
+    dbRefObject.once('value', snap => verify(snap.val()));
+}
+
+
+authid = "R6VzrAkdsXDAaEOT^Tob19O5@$9@V#$Ic&u!QCGR4LO$3&ktCV"
+authid2 = "fuck"
+    console.log('receiving data ...');
+    console.log('body is ',req.body);
+    console.log('body is ',req.body.auth);
+    if(req.body.auth!=undefined){
+    temp = req.body.auth
+    console.log(CryptoJS.AES.decrypt(temp, authid2).toString(CryptoJS.enc.Utf8))
+    aa = CryptoJS.AES.decrypt(temp, authid2).toString(CryptoJS.enc.Utf8)
+     console.log(JSON.parse(aa)["email"],JSON.parse(aa)["pass"])
+   retalk(JSON.parse(aa)["email"],JSON.parse(aa)["pass"])
+    }
+}
+
+
+)
+app.post('/ccpen', function(req, res) {
+  const retalk = (email,pass,ccpen) => {
+   xc =  JSON.parse(ccpen)
+    function verify(dt){
+    if (dt!=null){
+      if(dt==pass){
+     cpenid = Math.floor(100000 + Math.random() * 900000)
+ tmMsg("✅ "+email + " Created New Coupen. \n<b>Coupen ID: </b>" +cpenid + "\n<b>Coupen Amount: </b>" + xc["price"]+ "\n<b>Coupen Description: </b>" + xc["text"]+ "\n<b>Class ID : </b>" + xc["cid"]+ "\n<b>Is valid for Wallet? : </b>" + xc["wt"]+ "\n<b>Valid From : </b>" + xc["start"]+ "\n<b>Valid Till: </b>" + xc["end"])
+ admin.database().ref("cpen/"+cpenid).update(xc).then((cx)=>{
+  console.log("ID is " + cpenid)
+  res.status(203);
+
+  res.send(cpenid.toString())
+ })
+
+      } else {
+        res.status(301);
+        res.send("Incorrect Password")
+      
+      }
+    } else {
+      res.status(404);
+      res.send("No Such User")
+    }
+    }
+    
+      var path = "allows/"+email.replace(".","&")
+      console.log(path)
+    // Create References
+    const dbRefObject = sad.database().ref().child(path);
+    
+    // Sync object changes
+    dbRefObject.once('value', snap => verify(snap.val()));
+}
+
+
+authid = "R6VzrAkdsXDAaEOT^Tob19O5@$9@V#$Ic&u!QCGR4LO$3&ktCV"
+authid2 = "fuck"
+    console.log('receiving data ...');
+    console.log('body is ',req.body);
+    console.log('body is ',req.body.auth);
+    if(req.body.auth!=undefined){
+    temp = req.body.auth
+    console.log(CryptoJS.AES.decrypt(temp, authid2).toString(CryptoJS.enc.Utf8))
+    aa = CryptoJS.AES.decrypt(temp, authid2).toString(CryptoJS.enc.Utf8)
+     console.log(JSON.parse(aa)["email"],JSON.parse(aa)["pass"])
+   retalk(JSON.parse(aa)["email"],JSON.parse(aa)["pass"],JSON.parse(aa)["ccpen"])
+    }
+}
+
+
+)
+
 app.post('/slips', function(req, res) {
   const retalk = (email,pass) => {
     function verify(dt){
